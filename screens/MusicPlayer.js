@@ -1,7 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Dimensions, Image} from 'react-native';
+import Slider from '@react-native-community/slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import songs from '.../model/Dataa';
 const{width,height}=Dimensions.get('window');
 
 const MusicPlayer = () => {
@@ -15,9 +16,50 @@ const MusicPlayer = () => {
           style = {style.musicImage}
           />
         </View>
+
+        {/* Song Content */}
+        <View>
+          <Text style={[style.songContent, style.songTitle]}> Some Title </Text>
+          <Text style={[style.songContent, style.songArtist]}> Some Artist Name </Text>
+        </View>
+
+
         {/* slider */}
+        <View>
+        <Slider
+             style={style.progressBar}
+             value={10}
+             minimumValue={0}
+             maximumValue={100}
+             thumbTintColor="#FFD369"
+             minimumTrackTintColor="#FFD369"
+             maximumTrackTintColor="#fff"
+             onSlidingComplete={() => {}}
+           />
+           {/*music progress durations*/}
+           <View style={style.progressLevelDuration}>
+            <Text style={style.progressLabelText}> 00:00</Text>
+            <Text style={style.progressLabelText}> 00:00</Text>
+           </View>
+        </View>
 
         {/* music controls */}
+        <View style={style.musicControlsContainer}> 
+        <TouchableOpacity onPress={() => {}}>
+         <Ionicons name="play-skip-back-outline" size={35} color="#FFD369" />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => {}}>
+         <Ionicons name="ios-pause-circle" size={75} color="#FFD369" />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => {}}>
+        <Ionicons name="play-skip-forward-outline"
+         size={35}
+         color="#FFD369"
+        />
+        </TouchableOpacity>
+        </View>
 
       </View>
 
@@ -77,7 +119,8 @@ const style = StyleSheet.create({
     imageWrapper: {
       width : 300,
       height:340, 
-      marginBottom:25
+      marginBottom:20,
+      marginTop : 20,
     },
     musicImage : {
       width:'100%',
@@ -95,5 +138,42 @@ const style = StyleSheet.create({
       },
       shadowOpacity:0.5,
       shadowRadius:3.84,
-    }
+    },
+    songContent:{
+      textAlign:'center',
+      color : '#EEEEEE',
+    },
+
+    songTitle : {
+      fontSize:18,
+      fontWeight:'600',
+    },
+
+    songArtist : {
+      fontSize:16,
+      fontWeight:'300',
+    },
+    progressBar:{
+      width:350,
+      height:40,
+      marginTop:20,
+      flexDirection:'row',
+    },
+    progressLevelDuration:{
+      width:340,
+      flexDirection:'row',
+      justifyContent:'space-between',
+    },
+    progressLabelText:{
+      color:'#fff',
+      fontWeight:'500',
+    },
+
+    musicControlsContainer :{
+      flexDirection: 'row',
+      alignItems : 'center',
+      justifyContent:'space-between',
+      width:'60%',
+      marginTop : 10,
+    },
 });
