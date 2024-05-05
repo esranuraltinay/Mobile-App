@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Dimensions, Image} from 'react-native';
 import Slider from '@react-native-community/slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import songs from '.../model/Dataa';
+import songs from '.../modell/Dataa';
 const{width,height}=Dimensions.get('window');
 
 const MusicPlayer = () => {
