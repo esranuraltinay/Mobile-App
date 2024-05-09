@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Dimensions, Image} from 'react-native';
 import Slider from '@react-native-community/slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -6,16 +6,37 @@ import songs from '.../modell/Dataa';
 const{width,height}=Dimensions.get('window');
 
 const MusicPlayer = () => {
+
+  const scrollX = useRef(new Animated.Value(0)).current;
+
+  useEffect(()=> {
+    scrollX.addListener(({value}) => {
+      console.log(value);
+    });
+  }, []);
+  const renderSongs = ({item,index}) =>{
+    return(
+      <View style={style.mainImageWrapper}>
+        <View style = {[style.imageWrapper, style.elevation]}>
+          <Image source={item.artwork} style = {style.musicImage} />
+        </View>
+      </View>
+    );
+  };
   return (
     <SafeAreaView style ={style.container}>
       <View style = {style.maincontainer}>
         {/* image */}
-        <View style = {[style.imageWrapper, style.elevation]}>
-          <Image
-          source={require('../assets/img/img1.jpg')}
-          style = {style.musicImage}
-          />
-        </View>
+         <FlatList
+            renderItem={renderSongs}
+            data={songs}
+            keyExtractor={item => item.id}
+            horizontal
+            pagingEnabled
+            showHorizontalScrollIndicator={false}
+            scrollEventThrottle={16}
+            onScroll={()=> {}}
+         />
 
         {/* Song Content */}
         <View>
@@ -116,6 +137,12 @@ const style = StyleSheet.create({
       width:'80%'
     },
 
+    mainImageWrapper :{
+      width : width,
+      justifyContent : 'center',
+      alignItems : 'center',
+      
+    },
     imageWrapper: {
       width : 300,
       height:340, 
