@@ -6,28 +6,48 @@ import songs from '.../modell/Dataa';
 const{width,height}=Dimensions.get('window');
 
 const MusicPlayer = () => {
-
+  const playBackState = usePlaybackState();
+  const progress = useProgress();
+  //   custom states
+  const [songIndex, setsongIndex] = useState(0);
+  const [repeatMode, setRepeatMode] = useState('off');
+  const [trackTitle, setTrackTitle] = useState();
+  const [trackArtist, setTrackArtist] = useState();
+  const [trackArtwork, setTrackArtwork] = useState();
+  
+  // custom referecnces
+  
   const scrollX = useRef(new Animated.Value(0)).current;
+  const songSlider = useRef(null);
+
 
   useEffect(()=> {
     scrollX.addListener(({value}) => {
-      console.log(value);
+      console.log('ScrollX: ${value} | Device Width : ${width}');
+      const index = Math.round(value / width);
+
+      skipTo(index);
+      setsongIndex(index);
+
+      //console.log(`Index : ${index}`);
     });
   }, []);
+
+
   const renderSongs = ({item,index}) =>{
     return(
-      <View style={style.mainImageWrapper}>
+      <Animated.View style={style.mainImageWrapper}>
         <View style = {[style.imageWrapper, style.elevation]}>
           <Image source={item.artwork} style = {style.musicImage} />
         </View>
-      </View>
+      </Animated.View>
     );
   };
   return (
     <SafeAreaView style ={style.container}>
       <View style = {style.maincontainer}>
         {/* image */}
-         <FlatList
+         <Animated.FlatList
             renderItem={renderSongs}
             data={songs}
             keyExtractor={item => item.id}
@@ -35,13 +55,22 @@ const MusicPlayer = () => {
             pagingEnabled
             showHorizontalScrollIndicator={false}
             scrollEventThrottle={16}
-            onScroll={()=> {}}
+            onScroll={Animated.event(
+              [
+                {
+                  nativeEvent :{
+                    contentOffset :{x: scrollX},
+                  }
+                }
+              ],
+              {useNativeDriver : true},
+            )}
          />
 
         {/* Song Content */}
         <View>
-          <Text style={[style.songContent, style.songTitle]}> Some Title </Text>
-          <Text style={[style.songContent, style.songArtist]}> Some Artist Name </Text>
+          <Text style={[style.songContent, style.songTitle]}> {songs[songIndex].title} </Text>
+          <Text style={[style.songContent, style.songArtist]}> {songs[songIndex].artist} </Text>
         </View>
 
 
@@ -83,6 +112,38 @@ const MusicPlayer = () => {
         </View>
 
       </View>
+
+      {/* bottom section err */}
+      <View style={style.bottomSection}>
+        <View style={style.bottomIconContainer}>
+          <TouchableOpacity onPress={() => {}}>
+            <Ionicons name="heart-outline" size={30} color="#888888" />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={changeRepeatMode}>
+            <MaterialCommunityIcons
+              name={`${repeatIcon()}`}
+              size={30}
+              color={repeatMode !== 'off' ? '#FFD369' : '#888888'}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => {}}>
+            <Ionicons name="share-outline" size={30} color="#888888" />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => {}}>
+            <Ionicons name="ellipsis-horizontal" size={30} color="#888888" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+      
+
+
 
       <View style={style.bottomContainer}>
 
