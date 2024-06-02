@@ -23,7 +23,7 @@ import TrackPlayer, {
 import Slider from '@react-native-community/slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import songs from '../model/data';
+import songs from '../modell/data';
 
 const {width, height} = Dimensions.get('window');
 
