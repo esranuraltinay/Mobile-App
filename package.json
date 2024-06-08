@@ -1,5 +1,6 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "name": "weblab",
   "version": "1.0.0",
   "description": "",
@@ -13,6 +14,9 @@
   "license": "ISC"
 =======
   "name": "AwesomeProject",
+=======
+  "name": "deneme",
+>>>>>>> d0e38a33466256c3d80e7ddde199e63a1a3c4c79
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -26,6 +30,7 @@
     "@react-native-community/slider": "^4.5.2",
     "react": "18.2.0",
     "react-native": "0.73.6",
+    "react-native-track-player": "^4.1.1-nightly-7cb43bba65d8f518d92de76a57e743d652124cb5",
     "react-native-vector-icons": "^10.0.3"
   },
   "devDependencies": {
@@ -35,7 +40,7 @@
     "@react-native/babel-preset": "0.73.21",
     "@react-native/eslint-config": "0.73.2",
     "@react-native/metro-config": "0.73.5",
-    "@react-native/typescript-config": "0.73.1",
+    "@react-native/typescript-config": "^0.73.1",
     "@types/react": "^18.2.6",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.6.3",
@@ -48,5 +53,9 @@
   "engines": {
     "node": ">=18"
   }
+<<<<<<< HEAD
 >>>>>>> fcbd3ab79b80cbd023875ad61222da19754a7305
 }
+=======
+}
+>>>>>>> d0e38a33466256c3d80e7ddde199e63a1a3c4c79
